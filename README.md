@@ -1,6 +1,6 @@
 # DS313-SHAS
 
-The following is a guide to reproducing the SHAS study: "Approaching Optimal Segmentation for End-to-End Speech Translation", using two training approaches — local training and training in cloud-based environments such as Colab and Kaggle.
+The following is a guide to reproducing the study "SHAS- Approaching Optimal Segmentation for End-to-End Speech Translation", using two training approaches — local training and training in cloud-based environments such as Colab and Kaggle.
 
 ## Data Preparation
 
