@@ -202,9 +202,9 @@ bash ${SHAS_ROOT}/src/eval_scripts/eval_custom_segmentation.sh \
   $path_to_st_model_ckpt
 ```
 
-After completing the above steps, the custom_segment.yaml file will be available in the output directory. This file, together with the test set audio files from mTEDx, will serve as input for the translation model on the Kaggle platform. Using file shas-translation-eval.ipynb
+After completing this step, the file `custom_segment.yaml` will be generated in your output directory. Together with the test audio files from mTEDx, this YAML file will serve as input to the translation pipeline on Kaggle using the provided notebook `shas-translation-eval.ipynb`.
 
-After performing speech translation on Kaggle using the provided sample file, you will use four files — test.it.xlm, test.en.xlm, translations.txt, and translation_formatted.txt — to evaluate the model locally via the terminal in WSL.
+Once speech translation is complete, you'll use four output files — `test.it.xlm`, `test.en.xlm`, `translations.txt`, and `translation_formatted.txt`  — to perform local evaluation via the WSL terminal.
 
 ---
 
@@ -243,7 +243,7 @@ python ${SHAS_ROOT}/src/eval_scripts/score_translation.py $working_dir
 
 In addition to local CPU training, SHAS also supports cloud-based training (e.g., Colab, Kaggle). See notebook:
 
-``
+`SHAS-Train.ipynb.`
 
 Then perform translation + evaluation just like the local setup using the generated `custom_segments.yaml`.
 
