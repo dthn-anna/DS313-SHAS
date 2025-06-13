@@ -127,7 +127,7 @@ python ${SHAS_ROOT}/src/data_prep/fix_joint_s2t_cfg.py -c ${mult_model_path}/che
 ### ✅ Step 1. Export environment variables (WSL)
 
 ```bash
-# export paths here like step 1 above (use /mnt/d/... format)
+export SHAS_ROOT="/mnt/d/SHAS/SHAS_ROOT" export MUSTC_ROOT="/mnt/d/SHAS/MUSTC_ROOT" export MTEDX_ROOT="/mnt/d/SHAS/MTEDX_ROOT" export SEGM_DATASETS_ROOT="/mnt/d/SHAS/SEGM_DATASETS_ROOT" export ST_MODELS_PATH="/mnt/d/SHAS/ST_MODELS_PATH" export RESULTS_ROOT="/mnt/d/SHAS/RESULTS_ROOT" export FAIRSEQ_ROOT="/mnt/d/SHAS/FAIRSEQ_ROOT" export MWERSEGMENTER_ROOT="/mnt/d/SHAS/MWERSEGMENTER_ROOT" export path_to_wavs="/mnt/d/SHAS/MTEDX_ROOT/it-en/data/test/wav" export path_to_checkpoint="/mnt/d/SHAS/RESULTS_ROOT/supervised_hybrid/mult_sfc_model/ckpts/step-1682.pt" export path_to_custom_segmentation_yaml="/mnt/d/SHAS/output/custom_segments.yaml" export max_segment_length=14 export path_to_original_segmentation_yaml="/mnt/d/SHAS/MTEDX_ROOT/it-en/data/test/txt/test.yaml" export path_to_original_segment_transcriptions="/mnt/d/SHAS/MTEDX_ROOT/it-en/data/test/txt/test.it" export path_to_original_segment_translations="/mnt/d/SHAS/MTEDX_ROOT/it-en/data/test/txt/test.en" export src_lang=it export tgt_lang=en export path_to_st_model_ckpt="/mnt/d/SHAS/ST_MODELS_PATH/joint-s2t-multilingual/checkpoint17.pt" export PYTHONPATH="/mnt/d/SHAS/FAIRSEQ_ROOT"
 ```
 
 ### ✅ Step 2. Fix torchaudio bugs
@@ -172,7 +172,11 @@ conda create -n shas_wsl python=3.9.6
 ### ✅ Step 5. Install libraries (WSL)
 
 ```bash
-# same as Step 6 above
+conda install -c pytorch pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=10.2.89 conda install -c conda-forge pandas=1.3.3 tqdm=4.62.3 numpy=1.22.1 transformers=4.11.3 pip=21.2.4
+
+pip install sacrebleu==1.5.0 sacremoses==0.0.46 webrtcvad==2.0.10 pydub==0.25.1 wandb==0.12.9 SoundFile==0.10.3.post1 PyYAML==6.0 scikit_learn==1.0.2 tweepy==4.5.0 sentencepiece==0.1.96
+
+pip install "protobuf<=3.20.3"
 ```
 
 ### ✅ Step 6. Install Fairseq (WSL)
@@ -197,6 +201,10 @@ bash ${SHAS_ROOT}/src/eval_scripts/eval_custom_segmentation.sh \
   $tgt_lang \
   $path_to_st_model_ckpt
 ```
+
+After completing the above steps, the custom_segment.yaml file will be available in the output directory. This file, together with the test set audio files from mTEDx, will serve as input for the translation model on the Kaggle platform. Using file shas-translation-eval.ipynb
+
+After performing speech translation on Kaggle using the provided sample file, you will use four files — test.it.xlm, test.en.xlm, translations.txt, and translation_formatted.txt — to evaluate the model locally via the terminal in WSL.
 
 ---
 
@@ -224,6 +232,7 @@ bash ${MWERSEGMENTER_ROOT}/segmentBasedOnMWER.sh \
     normalize \
     1
 
+eval "$(conda shell.bash hook)"
 conda activate shas_wsl
 python ${SHAS_ROOT}/src/eval_scripts/score_translation.py $working_dir
 ```
