@@ -5,29 +5,29 @@ The following is a guide to reproducing the study "SHAS- Approaching Optimal Seg
 ## Data Preparation
 
 ### Step 1. Set up enviroment
-'''export SHAS_ROOT=D:/SHAS/SHAS_ROOT
+export SHAS_ROOT=D:/SHAS/SHAS_ROOT
 export MUSTC_ROOT=D:/SHAS/MUSTC_ROOT
 export MTEDX_ROOT="/d/SHAS/MTEDX_ROOT"
 export SEGM_DATASETS_ROOT=D:/SHAS/SEGM_DATASETS_ROOT
 export ST_MODELS_PATH=D:/SHAS/ST_MODELS_PATH
 export RESULTS_ROOT=D:/SHAS/RESULTS_ROOT
 export FAIRSEQ_ROOT=D:/SHAS/FAIRSEQ_ROOT
-export MWERSEGMENTER_ROOT=D:/SHAS/MWERSEGMENTER_ROOT'''
+export MWERSEGMENTER_ROOT=D:/SHAS/MWERSEGMENTER_ROOT
 
 
 ### Step 2. Git clone SHAS repo
-'''git clone https://github.com/mt-upc/SHAS.git ${SHAS_ROOT}'''   
+git clone https://github.com/mt-upc/SHAS.git ${SHAS_ROOT}   
 
 
 ### Step 3. Create virtual conda enviroment with python 2.7
-'''conda create -n snakes27 python=2.7
-conda activate snakes27''' 
+conda create -n snakes27 python=2.7
+conda activate snakes27 
 
 ### Step 4. Downloaad mwerSegmenter tool 
-'''mkdir -p $MWERSEGMENTER_ROOT
+mkdir -p $MWERSEGMENTER_ROOT
 curl -O  https://www-i6.informatik.rwth-aachen.de/web/Software/mwerSegmenter.tar.gz
 tar -zxvf mwerSegmenter.tar.gz -C ${MWERSEGMENTER_ROOT}
-rm -r mwerSegmenter.tar.gz'''
+rm -r mwerSegmenter.tar.gz
 
 ### Step 5. Create virtual conda enviroment with python 2.7
 conda create -n shas python=3.9.6
